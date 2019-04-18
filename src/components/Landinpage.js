@@ -39,25 +39,25 @@ export default class Landinpage extends Component {
         event.preventDefault();
 
         const API_KEY='4b57ce179f3560a914e8e19f3feaba5b';
-        const ROOT_URL= `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
+        const ROOT_URL= `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
 
         const city = this.state.city;
-        console.log(city);
+        // console.log(city);
         const url=`${ROOT_URL}&q=${this.state.city}`;
-        console.log("Adad");
-        console.log(url);
+        // console.log("Adad");
+        // console.log(url);
         Axios.get(url)
         .then(res => {
           const persons = res.data;
-          console.log("data is",persons);
+        //   console.log("data is",persons);
         this.setState({ data:persons});
         this.setState({error:false})
 
-        console.log("city is ",this.state.data.city.name)
+        // console.log("city is ",this.state.data.city.name)
 
         })
         .catch(err => {
-            console.log("error is ",err);
+            // console.log("error is ",err);
             this.setState({error:true})
         })
     }
