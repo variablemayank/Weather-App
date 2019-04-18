@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './LandingPage.css';
 import Axios from 'axios';
 import Chart from './Chart';
+import Loader from 'react-loader-spinner'
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 
 
@@ -16,6 +17,7 @@ export default class Landinpage extends Component {
         temp: [],
         humidity: [],
         pressure: [],
+        loading: false,
     }
 
 
@@ -36,6 +38,9 @@ export default class Landinpage extends Component {
     }
 
     handleSubmit = event => {
+
+        this.setState({loading:true});
+
         event.preventDefault();
 
         const API_KEY='4b57ce179f3560a914e8e19f3feaba5b';
@@ -50,8 +55,10 @@ export default class Landinpage extends Component {
         .then(res => {
           const persons = res.data;
         //   console.log("data is",persons);
+        this.setState({loading:false});
         this.setState({ data:persons});
         this.setState({error:false})
+        this.parseData();
 
         // console.log("city is ",this.state.data.city.name)
 
@@ -59,6 +66,7 @@ export default class Landinpage extends Component {
         .catch(err => {
             // console.log("error is ",err);
             this.setState({error:true})
+            this.setState({loading:false});
         })
     }
 
@@ -106,9 +114,9 @@ export default class Landinpage extends Component {
             this.setState({pressure:pressure});
             this.setState({humidity:humidity});
 
-            console.log("temperature is", this.state.temp);
-            console.log("humidity is",humidity);
-            console.log("pressure is",pressure);
+            // console.log("temperature is", this.state.temp);
+            // console.log("humidity is",humidity);
+            // console.log("pressure is",pressure);
         }
     }
   render() {
@@ -137,8 +145,11 @@ export default class Landinpage extends Component {
                       />
                       <button onClick = {e => {
                           this.handleSubmit(e)
-                          this.parseData() }}>Search</button>
+                           }}>Search</button>
             </fieldset>
+                {
+                    this.state.loading ? <Loader type="Bars" color="#somecolor" height={80} width={80} />:''
+                }
                 {
                     this.state.error ? <div>No results found!</div>:''
                 }
@@ -192,13 +203,13 @@ export default class Landinpage extends Component {
                     </div>
                     <div style ={{width:'200px',height:'120px'}}>
                         <p>Pressure</p>
-                        <Sparklines height={120} width={80}  data= {this.state.pressure}>
+                        <Sparklines height={120} width={100}  data= {this.state.pressure}>
                             <SparklinesLine  color= "blue"/>
                         </Sparklines>
                     </div>
                     <div style ={{width:'200px',height:'120px'}}>
                         <p>Humidity</p>
-                        <Sparklines height={120} width={80}  data= {this.state.humidity}>
+                        <Sparklines height={120} width={100}  data= {this.state.humidity}>
                             <SparklinesLine  color= "blue"/>
                         </Sparklines>
                     </div>
