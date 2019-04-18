@@ -1,0 +1,46 @@
+#img {
+    background-image: url('/public/Weather-Blog-Image.jpg');
+      /* background-color: #cccccc; */
+}
+
+* {
+    /* background-color:#cccccc; */
+}
+.list {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    margin-top: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 180px;
+    height: 180px;
+    transition: 0.3s;
+    justify-content: space-between;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+
+    padding: 0px 10px;
+  }
+
+
+
+.container > h4 > b{
+    font-size: 10px;
+    font-family: sans-serif;
+    color: gray;
+    font-weight: lighter;
+}
